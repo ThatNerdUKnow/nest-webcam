@@ -3,7 +3,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha512-v8ng/uGxkge3d1IJuEo6dJP8JViyvms0cly9pnbfRxT6/31c3dRWxIiwGnMSWwZjHKOuY3EVmijs7k1jz/9bLA==" crossorigin="anonymous"></script>
         <img id="image"></img>
         <script>
-            const socket = io.connect('http://localhost:3000');
+            const socket = io.connect(`${window.location.hostname}:3000`);
             const imageElement = document.getElementById('image');
 
             socket.on('frame',(image)=>{
@@ -11,5 +11,15 @@
                 imageElement.src=`data:image/jpeg;base64,${image}`
             })
             </script>
+            <style>
+                body
+                {
+                    margin:0px
+                }
+                img
+                {
+                    width:100%;
+                }
+            </style>
     </body>
 </html>
