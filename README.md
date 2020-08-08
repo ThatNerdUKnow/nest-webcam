@@ -12,7 +12,7 @@ npm run start
 ```
 
 ### Prerequisites
-
+Install nodejs before installing dependencies
 Opencv4nodejs requires that cmake, python and optionally windows build tools if you're on windows.
 the windows build tools are available through npm using this command
 ```
