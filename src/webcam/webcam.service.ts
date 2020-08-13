@@ -12,7 +12,7 @@ export class WebcamService {
   getCam() {}
 
   onModuleInit() {
-    let cvCap = new cv.VideoCapture(0);
+    let cvCap = new cv.VideoCapture("/dev/video2");
     
         
    
@@ -23,19 +23,26 @@ export class WebcamService {
     console.log("Framerate: " + cvCap.get(cv.CAP_PROP_FPS))
 
     let interval = 1000 / cvCap.get(cv.CAP_PROP_FPS);
-
-    
+    //interval+=2;
+    console.log(interval);
+    //interval = 100
     
     setInterval(() => {
         
       //const frame = cvCap.read();
-      const frameAsync = cvCap.readAsync().then(frame => {
+      try{
+      const frame = cvCap.read()
         const image = cv.imencode('.jpg', frame).toString('base64');
         //console.log(image);
         this.server.emit('frame', image);
-       
+      }catch(err)
+      {
+        cvCap.reset();
         
-      });
+        console.log("Frame dropped")
+      }
+        
+      
 
       
       
